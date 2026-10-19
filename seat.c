@@ -45,6 +45,40 @@
 
 static void drag_icon_update_position(struct cg_drag_icon *drag_icon);
 
+/*
+ * Experimental touch coordinate correction for a single-output kiosk.
+ * Not intended for multi-output configurations.
+ */
+static void
+transform_touch_coords(struct cg_seat *seat, double *x, double *y)
+{
+    struct cg_output *output;
+
+    wl_list_for_each (output, &seat->server->outputs, link) {
+        double tx = *x;
+        double ty = *y;
+
+        switch (output->wlr_output->transform) {
+        case WL_OUTPUT_TRANSFORM_90:
+            *x = 1.0 - ty;
+            *y = tx;
+            break;
+        case WL_OUTPUT_TRANSFORM_180:
+            *x = 1.0 - tx;
+            *y = 1.0 - ty;
+            break;
+        case WL_OUTPUT_TRANSFORM_270:
+            *x = ty;
+            *y = 1.0 - tx;
+            break;
+        default:
+            break;
+        }
+
+        break;
+    }
+}
+
 /* XDG toplevels may have nested surfaces, such as popup windows for context
  * menus or tooltips. This function tests if any of those are underneath the
  * coordinates lx and ly (in output Layout Coordinates). If so, it sets the
@@ -493,8 +527,13 @@ handle_touch_down(struct wl_listener *listener, void *data)
 	struct cg_seat *seat = wl_container_of(listener, seat, touch_down);
 	struct wlr_touch_down_event *event = data;
 
+	double x = event->x;
+	double y = event->y;
+
+	transform_touch_coords(seat, &x, &y);
+
 	double lx, ly;
-	wlr_cursor_absolute_to_layout_coords(seat->cursor, &event->touch->base, event->x, event->y, &lx, &ly);
+	wlr_cursor_absolute_to_layout_coords(seat->cursor, &event->touch->base, x, y, &lx, &ly);
 
 	double sx, sy;
 	struct wlr_surface *surface;
@@ -544,8 +583,13 @@ handle_touch_motion(struct wl_listener *listener, void *data)
 		return;
 	}
 
+	double x = event->x;
+	double y = event->y;
+
+	transform_touch_coords(seat, &x, &y);
+
 	double lx, ly;
-	wlr_cursor_absolute_to_layout_coords(seat->cursor, &event->touch->base, event->x, event->y, &lx, &ly);
+	wlr_cursor_absolute_to_layout_coords(seat->cursor, &event->touch->base, x, y, &lx, &ly);
 
 	double sx, sy;
 	struct wlr_surface *surface;
