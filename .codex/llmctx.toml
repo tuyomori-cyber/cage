@@ -1,0 +1,3 @@
+context = "foxbook"
+repo = "cage"
+context_dir = "../foxbook/.context"

@@ -1,5 +1,7 @@
 # Cage: a Wayland kiosk
 
+> Foxbook向けの改造内容と運用前提は[仕様書 v0.1](specification/foxbook-cage仕様書v0.1.md)、未確認事項は[TODO](TODO.md)を参照してください。このREADMEの残りは上流Cageの説明です。
+
 <img src="https://www.hjdskes.nl/img/projects/cage/cage.svg" alt="Cage's logo" width="150px" align="right">
 
 This is Cage, a Wayland kiosk. A kiosk runs a single, maximized
