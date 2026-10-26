@@ -6,7 +6,7 @@
 
 - Foxbookで必要な改造は、v0.2.0系を親とする`fix/touch-output-transform`のコミット`e7e88b1`のみである。
 - `seat.c`のタッチdown／motion座標を、出力transformが`90`、`180`、`270`の場合に補正する。
-- `/home/tuyomori/project/cage`の現在のチェックアウトは`master`であり、この改造コミットを含まない。改造済みの作業コピーは`/home/tuyomori/project/cage-v0.2.0`で、同コミットをチェックアウトしている。
+- `/home/tuyomori/project/cage`は`fix/touch-output-transform`をチェックアウトし、改造コミット`e7e88b1`とFoxbook文書コミット`87f90ab`を含む。`cage-v0.2.0`は比較用作業コピーであり、管理上のリポジトリ名ではない。
 
 ## 未完了
 

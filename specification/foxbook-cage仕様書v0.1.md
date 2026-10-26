@@ -9,7 +9,7 @@
 
 FoxbookはSurface上のCage／WaylandセッションでFirefoxを使う。画面を回転した時にも、タッチ座標が表示上の位置と一致することがこの改造の目的である。
 
-正規のリポジトリ名は`cage`である。現在の`cage`作業ツリーは上流追従の`master`（`ef6ef6a`）で、改造自体はユーザーForkの`origin/fix/touch-output-transform`にある`e7e88b1`へ記録されている。`cage-v0.2.0`は改造コミットをチェックアウトした比較用作業コピーであり、管理上のリポジトリ名ではない。
+正規のリポジトリ名は`cage`である。現在の`cage`作業ツリーはユーザーForkの`fix/touch-output-transform`をチェックアウトし、改造コミット`e7e88b1`とFoxbook文書コミット`87f90ab`を含む。`master`（`ef6ef6a`）には改造を含まない。`cage-v0.2.0`は比較用作業コピーであり、管理上のリポジトリ名ではない。
 
 ## 2. 改造の基準と範囲
 
